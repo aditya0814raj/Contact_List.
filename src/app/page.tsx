@@ -8,7 +8,6 @@ import SearchBar from '@/components/app/search-bar';
 import ContactList from '@/components/app/contact-list';
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { useSidebar } from '@/components/ui/sidebar';
 import AppSidebar from '@/components/app/sidebar';
 
 type View = 'all' | 'favourites';
@@ -18,7 +17,6 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentView, setCurrentView] = useState<View>('all');
   const { toast } = useToast();
-  const { open: sidebarOpen } = useSidebar();
 
   const handleAddContact = (newContact: Omit<Contact, 'id' | 'avatarUrl' | 'isFavourite'>) => {
     const newId = contacts.length > 0 ? Math.max(...contacts.map(c => c.id)) + 1 : 1;
@@ -84,22 +82,22 @@ export default function Home() {
   }, [contacts, searchTerm, currentView]);
 
   return (
-    <div className="flex">
+    <div className="flex bg-background min-h-screen">
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <div className="flex-1 flex flex-col items-center bg-background min-h-screen">
-          <div className="w-full max-w-7xl px-4 md:px-8">
-            <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
-            <div className="my-6">
-              <SearchBar onSearch={setSearchTerm} />
-            </div>
-            <ContactList 
-              contacts={filteredContacts}
-              onUpdateContact={handleUpdateContact}
-              onDeleteContact={handleDeleteContact}
-              onToggleFavourite={handleToggleFavourite}
-            />
+      <main className="flex-1 flex flex-col items-center">
+        <div className="w-full max-w-7xl px-4 md:px-8">
+          <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
+          <div className="my-6">
+            <SearchBar onSearch={setSearchTerm} />
           </div>
+          <ContactList 
+            contacts={filteredContacts}
+            onUpdateContact={handleUpdateContact}
+            onDeleteContact={handleDeleteContact}
+            onToggleFavourite={handleToggleFavourite}
+          />
         </div>
+      </main>
     </div>
   );
 }
