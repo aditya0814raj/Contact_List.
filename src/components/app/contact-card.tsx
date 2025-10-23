@@ -57,7 +57,7 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
                     </DropdownMenuItem>
                 </EditContactDialog>
               <AlertDialogTrigger asChild>
-                <DropdownMenuItem className="text-destructive focus:text-destructive">
+                <DropdownMenuItem>
                   Delete
                 </DropdownMenuItem>
               </AlertDialogTrigger>
