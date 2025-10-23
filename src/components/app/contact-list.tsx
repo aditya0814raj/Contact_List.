@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import type { Contact } from '@/lib/types';
 import ContactCard from './contact-card';
@@ -20,7 +22,7 @@ export default function ContactList({ contacts, onUpdateContact, onDeleteContact
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {contacts.map((contact) => (
         <ContactCard 
           key={contact.id} 
