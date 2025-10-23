@@ -4,9 +4,11 @@ import ContactCard from './contact-card';
 
 interface ContactListProps {
   contacts: Contact[];
+  onUpdateContact: (contact: Contact) => void;
+  onDeleteContact: (id: number) => void;
 }
 
-export default function ContactList({ contacts }: ContactListProps) {
+export default function ContactList({ contacts, onUpdateContact, onDeleteContact }: ContactListProps) {
   if (contacts.length === 0) {
     return (
       <div className="text-center py-16">
@@ -18,8 +20,13 @@ export default function ContactList({ contacts }: ContactListProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {contacts.map((contact, index) => (
-        <ContactCard key={contact.id} contact={contact} />
+      {contacts.map((contact) => (
+        <ContactCard 
+          key={contact.id} 
+          contact={contact} 
+          onUpdateContact={onUpdateContact}
+          onDeleteContact={onDeleteContact}
+        />
       ))}
     </div>
   );

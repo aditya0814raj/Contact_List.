@@ -3,13 +3,24 @@ import Image from 'next/image';
 import type { Contact } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Mail, MapPin, Phone, User } from 'lucide-react';
+import { Mail, MapPin, MoreVertical, Phone } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import EditContactDialog from './edit-contact-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/alert-dialog';
+
 
 interface ContactCardProps {
   contact: Contact;
+  onUpdateContact: (contact: Contact) => void;
+  onDeleteContact: (id: number) => void;
 }
 
-export default function ContactCard({ contact }: ContactCardProps) {
+export default function ContactCard({ contact, onUpdateContact, onDeleteContact }: ContactCardProps) {
   const getInitials = (name: string) => {
     const names = name.split(' ');
     if (names.length > 1) {
@@ -20,16 +31,57 @@ export default function ContactCard({ contact }: ContactCardProps) {
 
   return (
     <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <CardHeader className="flex flex-row items-center gap-4 pb-4">
-        <Avatar className="h-16 w-16">
-          <AvatarImage src={contact.avatarUrl} alt={contact.name} data-ai-hint="person portrait" />
-          <AvatarFallback className="text-xl bg-primary text-primary-foreground">
-            {getInitials(contact.name)}
-          </AvatarFallback>
-        </Avatar>
-        <div>
-          <CardTitle className="text-xl font-headline">{contact.name}</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between gap-4 pb-4">
+        <div className="flex items-center gap-4">
+          <Avatar className="h-16 w-16">
+            <AvatarImage src={contact.avatarUrl} alt={contact.name} data-ai-hint="person portrait" />
+            <AvatarFallback className="text-xl bg-primary text-primary-foreground">
+              {getInitials(contact.name)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <CardTitle className="text-xl font-headline">{contact.name}</CardTitle>
+          </div>
         </div>
+        <AlertDialog>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="p-2 rounded-full hover:bg-muted">
+                <MoreVertical className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <EditContactDialog contact={contact} onUpdateContact={onUpdateContact}>
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                        Edit
+                    </DropdownMenuItem>
+                </EditContactDialog>
+              <AlertDialogTrigger asChild>
+                <DropdownMenuItem className="text-destructive focus:text-destructive">
+                  Delete
+                </DropdownMenuItem>
+              </AlertDialogTrigger>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete the contact
+                for {contact.name}.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                className="bg-destructive hover:bg-destructive/90"
+                onClick={() => onDeleteContact(contact.id)}
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </CardHeader>
       <CardContent className="flex flex-col flex-grow justify-center space-y-3 pt-2 text-sm text-muted-foreground">
         <div className="flex items-center gap-3">
