@@ -86,20 +86,20 @@ export default function Home() {
   return (
     <div className="flex">
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <main className="flex-1 min-h-screen w-full flex flex-col items-center bg-background">
-        <div className="w-full max-w-7xl px-4 md:px-8">
-          <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
-          <div className="my-6">
-            <SearchBar onSearch={setSearchTerm} />
+      <div className="flex-1 flex flex-col items-center bg-background min-h-screen">
+          <div className="w-full max-w-7xl px-4 md:px-8">
+            <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
+            <div className="my-6">
+              <SearchBar onSearch={setSearchTerm} />
+            </div>
+            <ContactList 
+              contacts={filteredContacts}
+              onUpdateContact={handleUpdateContact}
+              onDeleteContact={handleDeleteContact}
+              onToggleFavourite={handleToggleFavourite}
+            />
           </div>
-          <ContactList 
-            contacts={filteredContacts}
-            onUpdateContact={handleUpdateContact}
-            onDeleteContact={handleDeleteContact}
-            onToggleFavourite={handleToggleFavourite}
-          />
         </div>
-      </main>
     </div>
   );
 }
