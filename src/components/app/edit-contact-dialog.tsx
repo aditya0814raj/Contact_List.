@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -24,7 +24,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import type { Contact } from '@/lib/types';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 
 const contactSchema = z.object({
@@ -44,6 +43,7 @@ interface EditContactDialogProps {
 
 export default function EditContactDialog({ contact, onUpdateContact, children }: EditContactDialogProps) {
   const [open, setOpen] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -60,10 +60,20 @@ export default function EditContactDialog({ contact, onUpdateContact, children }
     setOpen(false);
   };
   
-  const changeAvatar = () => {
-    const randomImage = PlaceHolderImages[Math.floor(Math.random() * PlaceHolderImages.length)];
-    onUpdateContact({ ...contact, avatarUrl: randomImage.imageUrl });
-  }
+  const handlePictureChangeClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onUpdateContact({ ...contact, avatarUrl: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -76,8 +86,15 @@ export default function EditContactDialog({ contact, onUpdateContact, children }
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center gap-4">
-            <Image src={contact.avatarUrl} alt={contact.name} width={100} height={100} className="rounded-full" />
-            <Button variant="outline" onClick={changeAvatar}>Change Picture</Button>
+            <Image src={contact.avatarUrl} alt={contact.name} width={100} height={100} className="rounded-full object-cover" />
+            <Button variant="outline" onClick={handlePictureChangeClick}>Change Picture</Button>
+            <input 
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              className="hidden"
+              accept="image/*"
+            />
         </div>
 
         <Form {...form}>

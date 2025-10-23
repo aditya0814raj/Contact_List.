@@ -34,7 +34,7 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
       <CardHeader className="flex flex-row items-center justify-between gap-4 pb-4">
         <div className="flex items-center gap-4">
           <Avatar className="h-16 w-16">
-            <AvatarImage src={contact.avatarUrl} alt={contact.name} data-ai-hint="person portrait" />
+            <AvatarImage src={contact.avatarUrl} alt={contact.name} className="object-cover" data-ai-hint="person portrait" />
             <AvatarFallback className="text-xl bg-primary text-primary-foreground">
               {getInitials(contact.name)}
             </AvatarFallback>
