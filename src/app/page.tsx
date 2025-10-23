@@ -86,7 +86,7 @@ export default function Home() {
   return (
     <div className="flex">
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <main className={`flex-1 min-h-screen flex flex-col bg-background transition-all duration-300 md:pl-12 group-data-[state=expanded]/sidebar-wrapper:md:pl-64`}>
+      <main className={`flex-1 min-h-screen flex flex-col items-center bg-background transition-all duration-300 md:pl-12 group-data-[state=expanded]/sidebar-wrapper:md:pl-64`}>
         <div className="w-full px-4 md:px-8 py-4 md:py-8">
           <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
           <div className="my-6">
