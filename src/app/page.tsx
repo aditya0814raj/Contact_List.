@@ -8,7 +8,7 @@ import SearchBar from '@/components/app/search-bar';
 import ContactList from '@/components/app/contact-list';
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Sidebar, SidebarContent, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { useSidebar } from '@/components/ui/sidebar';
 import AppSidebar from '@/components/app/sidebar';
 
 type View = 'all' | 'favourites';
@@ -86,8 +86,8 @@ export default function Home() {
   return (
     <div className="flex">
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <main className={`flex min-h-screen w-full flex-col items-center bg-background transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'md:ml-12'}`}>
-        <div className="w-full max-w-4xl p-4 md:p-8">
+      <main className={`flex min-h-screen w-full flex-col bg-background transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'md:ml-12'}`}>
+        <div className="w-full max-w-4xl p-4 md:p-8 mx-auto">
           <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
           <div className="my-6">
             <SearchBar onSearch={setSearchTerm} />
