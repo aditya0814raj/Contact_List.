@@ -86,8 +86,8 @@ export default function Home() {
   return (
     <div className="flex">
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <main className={`flex min-h-screen w-full flex-col bg-background transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'md:ml-12'}`}>
-        <div className="w-full max-w-4xl p-4 md:p-8 mx-auto">
+      <main className={`flex-1 min-h-screen flex flex-col items-center bg-background transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'md:ml-12'}`}>
+        <div className="w-full max-w-4xl p-4 md:p-8">
           <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
           <div className="my-6">
             <SearchBar onSearch={setSearchTerm} />
