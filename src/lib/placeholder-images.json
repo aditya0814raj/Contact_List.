@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "A portrait of a person smiling.",
+      "imageUrl": "https://images.unsplash.com/photo-1623605931891-d5b95ee98459?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXJzb24lMjBzbWlsaW5nfGVufDB8fHx8MTc2MTE3NzU2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person smiling"
+    },
+    {
+      "id": "2",
+      "description": "A professional headshot.",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NjExOTk4NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional headshot"
+    },
+    {
+      "id": "3",
+      "description": "A person in a casual setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1599793829933-ffbb5dc35397?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjYXN1YWwlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjEyNTQyOTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "casual portrait"
+    },
+    {
+      "id": "4",
+      "description": "A person outdoors.",
+      "imageUrl": "https://images.unsplash.com/photo-1523240524572-9fa79064364a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwZXJzb24lMjBvdXRkb29yc3xlbnwwfHx8fDE3NjEyMDc0ODV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person outdoors"
+    },
+    {
+      "id": "5",
+      "description": "A person in an office environment.",
+      "imageUrl": "https://images.unsplash.com/photo-1637164153353-ef260e2e7e7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBvZmZpY2V8ZW58MHx8fHwxNzYxMjA5NzYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person office"
+    }
+  ]
 }
