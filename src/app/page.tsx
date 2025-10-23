@@ -9,6 +9,7 @@ import ContactList from '@/components/app/contact-list';
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import AppSidebar from '@/components/app/sidebar';
+import { SidebarInset } from '@/components/ui/sidebar';
 
 type View = 'all' | 'favourites';
 
@@ -82,22 +83,24 @@ export default function Home() {
   }, [contacts, searchTerm, currentView]);
 
   return (
-    <div className="flex bg-background min-h-screen">
+    <>
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <main className="flex-1 flex flex-col items-center">
-        <div className="w-full max-w-7xl px-4 md:px-8">
-          <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
-          <div className="my-6">
-            <SearchBar onSearch={setSearchTerm} />
+      <SidebarInset>
+        <div className="flex flex-col items-center">
+          <div className="w-full px-4 md:px-8">
+            <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
+            <div className="my-6">
+              <SearchBar onSearch={setSearchTerm} />
+            </div>
+            <ContactList 
+              contacts={filteredContacts}
+              onUpdateContact={handleUpdateContact}
+              onDeleteContact={handleDeleteContact}
+              onToggleFavourite={handleToggleFavourite}
+            />
           </div>
-          <ContactList 
-            contacts={filteredContacts}
-            onUpdateContact={handleUpdateContact}
-            onDeleteContact={handleDeleteContact}
-            onToggleFavourite={handleToggleFavourite}
-          />
         </div>
-      </main>
-    </div>
+      </SidebarInset>
+    </>
   );
 }
