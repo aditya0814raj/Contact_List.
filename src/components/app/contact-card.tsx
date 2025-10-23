@@ -30,7 +30,7 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
   };
 
   return (
-    <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card/80 backdrop-blur-sm">
+    <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white/90 backdrop-blur-sm text-slate-800">
       <CardHeader className="flex flex-row items-center justify-between gap-4 pb-4">
         <div className="flex items-center gap-4">
           <Avatar className="h-16 w-16">
@@ -40,14 +40,14 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
             </AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle className="text-xl font-headline">{contact.name}</CardTitle>
+            <CardTitle className="text-xl font-headline text-slate-900">{contact.name}</CardTitle>
           </div>
         </div>
         <AlertDialog>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="p-2 rounded-full hover:bg-muted">
-                <MoreVertical className="h-5 w-5 text-muted-foreground" />
+              <button className="p-2 rounded-full hover:bg-slate-200">
+                <MoreVertical className="h-5 w-5 text-slate-500" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -83,17 +83,17 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
           </AlertDialogContent>
         </AlertDialog>
       </CardHeader>
-      <CardContent className="flex flex-col flex-grow justify-center space-y-3 pt-2 text-sm text-muted-foreground">
+      <CardContent className="flex flex-col flex-grow justify-center space-y-3 pt-2 text-sm text-slate-600">
         <div className="flex items-center gap-3">
-          <Mail className="h-4 w-4 text-primary" />
-          <a href={`mailto:${contact.email}`} className="hover:text-primary transition-colors">{contact.email}</a>
+          <Mail className="h-4 w-4 text-amber-800" />
+          <a href={`mailto:${contact.email}`} className="hover:text-amber-800 transition-colors">{contact.email}</a>
         </div>
         <div className="flex items-center gap-3">
-          <Phone className="h-4 w-4 text-primary" />
+          <Phone className="h-4 w-4 text-amber-800" />
           <span>{contact.phoneNumber}</span>
         </div>
         <div className="flex items-start gap-3">
-          <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+          <MapPin className="h-4 w-4 text-amber-800 mt-1 flex-shrink-0" />
           <span>{contact.address}</span>
         </div>
       </CardContent>
