@@ -30,7 +30,7 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
   };
 
   return (
-    <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <Card className="flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-card/80 backdrop-blur-sm">
       <CardHeader className="flex flex-row items-center justify-between gap-4 pb-4">
         <div className="flex items-center gap-4">
           <Avatar className="h-16 w-16">
@@ -85,15 +85,15 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
       </CardHeader>
       <CardContent className="flex flex-col flex-grow justify-center space-y-3 pt-2 text-sm text-muted-foreground">
         <div className="flex items-center gap-3">
-          <Mail className="h-4 w-4 text-accent" />
+          <Mail className="h-4 w-4 text-primary" />
           <a href={`mailto:${contact.email}`} className="hover:text-primary transition-colors">{contact.email}</a>
         </div>
         <div className="flex items-center gap-3">
-          <Phone className="h-4 w-4 text-accent" />
+          <Phone className="h-4 w-4 text-primary" />
           <span>{contact.phoneNumber}</span>
         </div>
         <div className="flex items-start gap-3">
-          <MapPin className="h-4 w-4 text-accent mt-1 flex-shrink-0" />
+          <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
           <span>{contact.address}</span>
         </div>
       </CardContent>

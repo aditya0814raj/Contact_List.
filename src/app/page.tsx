@@ -59,7 +59,7 @@ export default function Home() {
   }, [contacts, searchTerm]);
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center bg-background">
+    <main className="flex min-h-screen w-full flex-col items-center bg-gradient-to-br from-background to-blue-50">
       <div className="w-full max-w-4xl p-4 md:p-8">
         <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
         <div className="my-6">

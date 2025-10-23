@@ -107,7 +107,7 @@ export default function AddContactDialog({ onAddContact }: AddContactDialogProps
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+        <Button size="lg">
           <Plus className="mr-2 h-5 w-5" />
           Add Contact
         </Button>
