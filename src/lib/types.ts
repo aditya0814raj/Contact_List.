@@ -5,4 +5,5 @@ export type Contact = {
   phoneNumber: string;
   address: string;
   avatarUrl: string;
+  isFavourite: boolean;
 };

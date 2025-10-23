@@ -41,7 +41,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 interface AddContactDialogProps {
-  onAddContact: (newContact: Omit<Contact, 'id' | 'avatarUrl'>) => void;
+  onAddContact: (newContact: Omit<Contact, 'id' | 'avatarUrl' | 'isFavourite'>) => void;
 }
 
 export default function AddContactDialog({ onAddContact }: AddContactDialogProps) {

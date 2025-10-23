@@ -3,7 +3,7 @@ import Image from 'next/image';
 import type { Contact } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Mail, MapPin, MoreVertical, Phone } from 'lucide-react';
+import { Mail, MapPin, MoreVertical, Phone, Star } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,9 +18,10 @@ interface ContactCardProps {
   contact: Contact;
   onUpdateContact: (contact: Contact) => void;
   onDeleteContact: (id: number) => void;
+  onToggleFavourite: (id: number) => void;
 }
 
-export default function ContactCard({ contact, onUpdateContact, onDeleteContact }: ContactCardProps) {
+export default function ContactCard({ contact, onUpdateContact, onDeleteContact, onToggleFavourite }: ContactCardProps) {
   const getInitials = (name: string) => {
     const names = name.split(' ');
     if (names.length > 1) {
@@ -40,7 +41,10 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
             </AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle className="text-xl font-headline text-slate-900">{contact.name}</CardTitle>
+            <CardTitle className="text-xl font-headline text-slate-900 flex items-center gap-2">
+              {contact.name}
+              {contact.isFavourite && <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" />}
+            </CardTitle>
           </div>
         </div>
         <AlertDialog>
@@ -51,13 +55,16 @@ export default function ContactCard({ contact, onUpdateContact, onDeleteContact 
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <EditContactDialog contact={contact} onUpdateContact={onUpdateContact}>
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                        Edit
-                    </DropdownMenuItem>
-                </EditContactDialog>
+              <DropdownMenuItem onSelect={() => onToggleFavourite(contact.id)}>
+                {contact.isFavourite ? 'Remove from Favourites' : 'Add to Favourites'}
+              </DropdownMenuItem>
+              <EditContactDialog contact={contact} onUpdateContact={onUpdateContact}>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  Edit
+                </DropdownMenuItem>
+              </EditContactDialog>
               <AlertDialogTrigger asChild>
-                <DropdownMenuItem>
+                <DropdownMenuItem className="text-white">
                   Delete
                 </DropdownMenuItem>
               </AlertDialogTrigger>

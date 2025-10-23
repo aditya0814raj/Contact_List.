@@ -6,9 +6,10 @@ interface ContactListProps {
   contacts: Contact[];
   onUpdateContact: (contact: Contact) => void;
   onDeleteContact: (id: number) => void;
+  onToggleFavourite: (id: number) => void;
 }
 
-export default function ContactList({ contacts, onUpdateContact, onDeleteContact }: ContactListProps) {
+export default function ContactList({ contacts, onUpdateContact, onDeleteContact, onToggleFavourite }: ContactListProps) {
   if (contacts.length === 0) {
     return (
       <div className="text-center py-16">
@@ -26,6 +27,7 @@ export default function ContactList({ contacts, onUpdateContact, onDeleteContact
           contact={contact} 
           onUpdateContact={onUpdateContact}
           onDeleteContact={onDeleteContact}
+          onToggleFavourite={onToggleFavourite}
         />
       ))}
     </div>
