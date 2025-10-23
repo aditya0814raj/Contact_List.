@@ -86,9 +86,9 @@ export default function Home() {
   return (
     <div className="flex">
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
-      <main className={`flex-1 min-h-screen flex flex-col bg-background`}>
+      <main className="flex-1 min-h-screen flex flex-col bg-background">
         <div className="flex-1 flex justify-center py-4 md:py-8">
-          <div className="w-full max-w-7xl px-4 md:px-8">
+          <div className="w-full px-4 md:px-8">
             <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
             <div className="my-6">
               <SearchBar onSearch={setSearchTerm} />

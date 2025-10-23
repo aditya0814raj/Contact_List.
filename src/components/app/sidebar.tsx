@@ -1,6 +1,6 @@
 import React from 'react';
-import { Sidebar, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
-import { Users, Star } from 'lucide-react';
+import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from '@/components/ui/sidebar';
+import { Users, Star, BookUser } from 'lucide-react';
 
 type View = 'all' | 'favourites';
 
@@ -11,7 +11,13 @@ interface AppSidebarProps {
 
 export default function AppSidebar({ currentView, onSetView }: AppSidebarProps) {
   return (
-    <Sidebar>
+    <Sidebar collapsible="offcanvas">
+      <SidebarHeader>
+        <div className="flex items-center gap-2">
+            <BookUser className="h-8 w-8 text-amber-800" />
+            <h2 className="text-2xl font-bold text-primary">Contacts</h2>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
