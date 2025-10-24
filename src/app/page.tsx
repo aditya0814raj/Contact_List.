@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { initialContacts } from '@/lib/data';
 import type { Contact } from '@/lib/types';
 import AppHeader from '@/components/app/header';
@@ -13,11 +13,32 @@ import { SidebarInset } from '@/components/ui/sidebar';
 
 type View = 'all' | 'favourites';
 
+const CONTACTS_STORAGE_KEY = 'contacts';
+
 export default function Home() {
-  const [contacts, setContacts] = useState<Contact[]>(initialContacts);
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentView, setCurrentView] = useState<View>('all');
   const { toast } = useToast();
+
+  useEffect(() => {
+    try {
+      const storedContacts = localStorage.getItem(CONTACTS_STORAGE_KEY);
+      if (storedContacts) {
+        setContacts(JSON.parse(storedContacts));
+      } else {
+        setContacts(initialContacts);
+      }
+    } catch (error) {
+      console.error("Failed to parse contacts from localStorage", error);
+      setContacts(initialContacts);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(CONTACTS_STORAGE_KEY, JSON.stringify(contacts));
+  }, [contacts]);
+
 
   const handleAddContact = (newContact: Omit<Contact, 'id' | 'avatarUrl' | 'isFavourite'>) => {
     const newId = contacts.length > 0 ? Math.max(...contacts.map(c => c.id)) + 1 : 1;
@@ -81,24 +102,33 @@ export default function Home() {
     
     return filtered;
   }, [contacts, searchTerm, currentView]);
+  
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; 
+  }
 
   return (
     <>
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
       <SidebarInset>
-        <div className="flex flex-col items-center">
-          <div className="w-full px-4 md:px-8">
-            <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
-            <div className="my-6">
-              <SearchBar onSearch={setSearchTerm} />
+        <div className="flex justify-center w-full">
+            <div className="w-full max-w-7xl px-4 md:px-8">
+                <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
+                <div className="my-6">
+                <SearchBar onSearch={setSearchTerm} />
+                </div>
+                <ContactList 
+                contacts={filteredContacts}
+                onUpdateContact={handleUpdateContact}
+                onDeleteContact={handleDeleteContact}
+                onToggleFavourite={handleToggleFavourite}
+                />
             </div>
-            <ContactList 
-              contacts={filteredContacts}
-              onUpdateContact={handleUpdateContact}
-              onDeleteContact={handleDeleteContact}
-              onToggleFavourite={handleToggleFavourite}
-            />
-          </div>
         </div>
       </SidebarInset>
     </>
