@@ -16,7 +16,7 @@ export default function AppHeader({ onAddContact, totalContacts }: AppHeaderProp
         <SidebarTrigger />
         <BookUser className="h-10 w-10 text-primary" />
         <div>
-          <h1 className="text-4xl font-headline font-bold text-white">
+          <h1 className="text-4xl font-headline font-bold text-destructive">
             Contact List
           </h1>
           <p className="text-muted-foreground font-bold mt-1">Total Contacts: {totalContacts}</p>
