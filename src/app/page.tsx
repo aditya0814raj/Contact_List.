@@ -36,7 +36,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(CONTACTS_STORAGE_KEY, JSON.stringify(contacts));
+    // Only run on the client
+    if (typeof window !== 'undefined') {
+        localStorage.setItem(CONTACTS_STORAGE_KEY, JSON.stringify(contacts));
+    }
   }, [contacts]);
 
 
@@ -116,17 +119,17 @@ export default function Home() {
     <>
       <AppSidebar currentView={currentView} onSetView={setCurrentView} />
       <SidebarInset>
-        <div className="flex justify-center w-full">
-            <div className="w-full max-w-7xl px-4 md:px-8">
+        <div className="flex w-full flex-col">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
                 <AppHeader onAddContact={handleAddContact} totalContacts={contacts.length} />
                 <div className="my-6">
-                <SearchBar onSearch={setSearchTerm} />
+                    <SearchBar onSearch={setSearchTerm} />
                 </div>
                 <ContactList 
-                contacts={filteredContacts}
-                onUpdateContact={handleUpdateContact}
-                onDeleteContact={handleDeleteContact}
-                onToggleFavourite={handleToggleFavourite}
+                    contacts={filteredContacts}
+                    onUpdateContact={handleUpdateContact}
+                    onDeleteContact={handleDeleteContact}
+                    onToggleFavourite={handleToggleFavourite}
                 />
             </div>
         </div>
