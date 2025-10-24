@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from '@/components/ui/sidebar';
 import { Users, Star, BookUser } from 'lucide-react';
@@ -14,8 +16,8 @@ export default function AppSidebar({ currentView, onSetView }: AppSidebarProps) 
     <Sidebar collapsible="offcanvas">
       <SidebarHeader>
         <div className="flex items-center gap-2">
-            <BookUser className="h-8 w-8 text-amber-800" />
-            <h2 className="text-2xl font-bold text-primary">Contacts</h2>
+            <BookUser className="h-8 w-8 text-blue-500" />
+            <h2 className="text-2xl font-bold text-white">Contacts</h2>
         </div>
       </SidebarHeader>
       <SidebarContent>
