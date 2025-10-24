@@ -14,9 +14,9 @@ export default function AppHeader({ onAddContact, totalContacts }: AppHeaderProp
     <header className="flex flex-col sm:flex-row justify-between items-center mb-8">
       <div className="flex items-center gap-3 mb-4 sm:mb-0">
         <SidebarTrigger />
-        <BookUser className="h-10 w-10 text-amber-800" />
+        <BookUser className="h-10 w-10 text-primary" />
         <div>
-          <h1 className="text-4xl font-headline font-bold text-primary">
+          <h1 className="text-4xl font-headline font-bold text-white">
             Contact List
           </h1>
           <p className="text-muted-foreground font-bold mt-1">Total Contacts: {totalContacts}</p>
